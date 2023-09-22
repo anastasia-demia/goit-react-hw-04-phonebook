@@ -18,22 +18,40 @@ export const App = () => {
   }, [contacts]);
 
 
-  const addContact = (name, number) => {
-    const contact = {
-      id: nanoid(),
-      name,
-      number,
-    };
+  // const addContact = (name, number) => {
+  //   const contact = {
+  //     id: nanoid(),
+  //     name,
+  //     number,
+  //   };
 
-    if (!contacts.find(
-        ({ name }) => name.toLowerCase() === contact.name.toString().toLowerCase()
-      )
-    ) {
-      setContacts(prevState => [...prevState, contact])
-      } else {
-      return Notify.warning(`${contact.name} is already in contacts!`);
+  //   if (!contacts.find(
+  //       ({ name }) => name.toLowerCase() === contact.name.toString().toLowerCase()
+  //     )
+  //   ) {
+  //     setContacts(prevState => [...prevState, contact])
+  //     } else {
+  //     return Notify.warning(`${contact.name} is already in contacts!`);
+  //   }
+
+  // };
+  const addContact = ({ name, number }) => {
+    const isContact = contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+    if (isContact) {
+      Notify.failure(`${name} is already in contact`);
+      setContacts(contacts);
+    } else {
+      setContacts([
+        {
+          id: nanoid(),
+          name,
+          number,
+        },
+        ...contacts,
+      ]);
     }
-
   };
 
   const removeContact = ID => {
