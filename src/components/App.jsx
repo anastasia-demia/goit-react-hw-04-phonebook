@@ -18,23 +18,6 @@ export const App = () => {
   }, [contacts]);
 
 
-  // const addContact = (name, number) => {
-  //   const contact = {
-  //     id: nanoid(),
-  //     name,
-  //     number,
-  //   };
-
-  //   if (!contacts.find(
-  //       ({ name }) => name.toLowerCase() === contact.name.toString().toLowerCase()
-  //     )
-  //   ) {
-  //     setContacts(prevState => [...prevState, contact])
-  //     } else {
-  //     return Notify.warning(`${contact.name} is already in contacts!`);
-  //   }
-
-  // };
   const addContact = ({ name, number }) => {
     const isContact = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
